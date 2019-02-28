@@ -43,7 +43,7 @@ class Student extends Person {
     this.grade = Math.ceil(Math.random() * 100);
   }
   listsSubjects() {
-    this.favSubjects.forEach(function(subject) {console.log(subject)});
+    this.favSubjects.forEach(function(subject, i) {console.log(`Favorite Subject #${i + 1}: ${subject}`)});
   }
   PRAssignment(subject) {
     console.log(`${this.name} has submitted a PR for ${subject}`);
