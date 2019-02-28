@@ -188,10 +188,10 @@ console.log(nick.gradClassName);
 console.log(nick.favInstructor.name);
 nora.standUp('ux3_nora');
 
-console.log('===Stretch 1 & 2===');
-console.log(matt.grade);
-console.log(nick.changeGrade(matt));
-console.log(matt.grade);
-
+console.log('===Stretch 1===');
+console.log('Starting grade:',matt.grade);
+console.log('===Stretch 2===');
+console.log('Change in grade:',nick.changeGrade(matt));
+console.log('Resulting grade:',matt.grade);
 console.log('===Stretch 3===');
 matt.graduate();
