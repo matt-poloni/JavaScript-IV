@@ -7,33 +7,37 @@ Prototype Refactor
 2. Your goal is to refactor all of this code to use ES6 Classes. The console.log() statements should still return what is expected of them.
 
 */
-function GameObject(attr) {
-  this.createdAt = new Date();
-  this.name = attr.name;
-  this.dimensions = attr.dimensions;
+class GameObject {
+  constructor(attr) {
+    this.createdAt = new Date();
+    this.name = attr.name;
+    this.dimensions = attr.dimensions;
+  }
+  destroy() {
+    return `${this.name} was removed from the game.`;
+  }
 };
-GameObject.prototype.destroy = function() {
-  return `${this.name} was removed from the game.`;
+
+class CharacterStats extends GameObject {
+  constructor(attr) {
+    super(attr);
+    this.healthPoints = attr.healthPoints;
+  }
+  takeDamage() {
+    return `${this.name} took damage.`
+  }
 }
 
-function CharacterStats(attr) {
-  GameObject.call(this,attr);
-  this.healthPoints = attr.healthPoints;
-}
-CharacterStats.prototype = Object.create(GameObject.prototype);
-CharacterStats.prototype.takeDamage = function() {
-  return `${this.name} took damage.`
-}
-
-function Humanoid(attr) {
-  CharacterStats.call(this, attr);
-  this.team = attr.team;
-  this.weapons = attr.weapons;
-  this.language = attr.language;
-}
-Humanoid.prototype = Object.create(CharacterStats.prototype);
-Humanoid.prototype.greet = function() {
-  return `${this.name} offers a greeting in ${this.language}.`
+class Humanoid extends CharacterStats {
+  constructor(attr) {
+    super(attr);
+    this.team = attr.team;
+    this.weapons = attr.weapons;
+    this.language = attr.language;
+  }
+  greet() {
+    return `${this.name} offers a greeting in ${this.language}.`
+  }
 }
 
 // Character creation
@@ -97,43 +101,45 @@ console.log(mage.takeDamage()); // Bruce took damage.
 console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 
 // Stretch
-function Hero(attr) {
-  Humanoid.call(this, attr);
-}
-Hero.prototype = Object.create(Humanoid.prototype);
-Hero.prototype.attack = function(opponent=blackKnight) {
-  console.log(`Our hero, ${this.name}, uses ${this.weapons[
-    Math.floor(Math.random()*this.weapons.length)
-  ]} on ${opponent.name}.`);
-  let diceRoll = Math.floor(Math.random()*20);
-  if (diceRoll > 0) {
-    opponent.healthPoints -= diceRoll;
-    console.log(opponent.takeDamage());
-    if (opponent.healthPoints <= 0) {
-      console.log(opponent.destroy());
+class Hero extends Humanoid {
+  constructor(attr) {
+    super(attr);
+  }
+  attack(opponent=blackKnight) {
+    console.log(`Our hero, ${this.name}, uses ${this.weapons[
+      Math.floor(Math.random()*this.weapons.length)
+    ]} on ${opponent.name}.`);
+    let diceRoll = Math.floor(Math.random()*20);
+    if (diceRoll > 0) {
+      opponent.healthPoints -= diceRoll;
+      console.log(opponent.takeDamage());
+      if (opponent.healthPoints <= 0) {
+        console.log(opponent.destroy());
+      }
+    } else {
+      console.log(`Our hero, ${this.name}, failed to inflict damage upon ${opponent.name}`)
     }
-  } else {
-    console.log(`Our hero, ${this.name}, failed to inflict damage upon ${opponent.name}`)
   }
 }
 
-function Villain(attr) {
-  Humanoid.call(this, attr);
-}
-Villain.prototype = Object.create(Humanoid.prototype);
-Villain.prototype.devastate = function(opponent=arthur) {
-  console.log(`Our villain, ${this.name}, uses ${this.weapons[
-    Math.floor(Math.random()*this.weapons.length)
-  ]} on ${opponent.name}.`);
-  let diceRoll = Math.floor(Math.random()*20);
-  if (diceRoll > 0) {
-    opponent.healthPoints -= diceRoll;
-    console.log(opponent.takeDamage());
-    if (opponent.healthPoints <= 0) {
-      console.log(opponent.destroy());
+class Villain extends Humanoid {
+  constructor(attr) {
+    super(attr);
+  }
+  devastate = function(opponent=arthur) {
+    console.log(`Our villain, ${this.name}, uses ${this.weapons[
+      Math.floor(Math.random()*this.weapons.length)
+    ]} on ${opponent.name}.`);
+    let diceRoll = Math.floor(Math.random()*20);
+    if (diceRoll > 0) {
+      opponent.healthPoints -= diceRoll;
+      console.log(opponent.takeDamage());
+      if (opponent.healthPoints <= 0) {
+        console.log(opponent.destroy());
+      }
+    } else {
+      console.log(`Our villain, ${this.name}, failed to inflict damage upon ${opponent.name}`)
     }
-  } else {
-    console.log(`Our villain, ${this.name}, failed to inflict damage upon ${opponent.name}`)
   }
 }
 
