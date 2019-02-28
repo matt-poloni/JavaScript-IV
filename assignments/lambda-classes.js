@@ -57,3 +57,123 @@ class ProjectManager extends Instructor {
     console.log(`${this.name} debugs ${student.name}'s code on ${subject}`);
   }
 };
+
+// Object Creation
+
+// Generic People
+const jill = new Person({
+  name: 'Jill',
+  location: 'East Hillside',
+  age: 20,
+  gender: 'female',
+});
+const jack = new Person({
+  name: 'Jack',
+  location: 'South Hillside',
+  age: 19,
+  gender: 'male',
+});
+console.log('===Generic People===');
+jill.speak();
+console.log(jill.gender);
+jack.speak();
+console.log(jack.age);
+
+// Instructors
+const josh = new Instructor({
+  name: 'Josh',
+  location: 'Utah',
+  age: 30,
+  gender: 'male',
+  specialty: 'Front-End',
+  favLanguage: 'Javascript',
+  catchPhrase: `I can't type today`,
+});
+const jen = new Instructor({
+  name: 'Jen',
+  location: 'Colorado',
+  age: 42,
+  gender: 'female',
+  specialty: 'User Experience',
+  favLanguage: 'Python',
+  catchPhrase: 'You can do this',
+});
+
+
+// Students
+const matt = new Student ({
+  name: 'Matt',
+  location: 'Florida',
+  age: 31,
+  gender: 'male',
+  previousBackground: 'Self-Taught',
+  className: 'Web 18',
+  favSubjects: [
+    'Responsive Design',
+    'Preprocessors',
+    'Javascript'
+  ],
+});
+const martha = new Student ({
+  name: 'Martha',
+  location: 'Georgia',
+  age: 26,
+  gender: 'female',
+  previousBackground: 'Junior Front-End Developer',
+  className: 'UX 3',
+  favSubjects: [
+    'Design Theory',
+    'Prototyping',
+    'Quantitative User Research'
+  ],
+});
+
+// Project Managers
+const nick = new ProjectManager ({
+  name: 'Nick',
+  age: 23,
+  location: 'Unknown',
+  gender: 'male',
+  specialty: 'Codewars',
+  favLanguage: 'Javascript',
+  catchPhrase: 'Awesome',
+  gradClassName: 'Web 18',
+  favInstructor: josh,
+});
+const nora = new ProjectManager ({
+  name: 'Nora',
+  age: 32,
+  location: 'New Zealand',
+  gender: 'female',
+  specialty: 'Quantitative User Research',
+  favLanguage: 'Julia',
+  catchPhrase: `Don't make the user think`,
+  gradClassName: 'UX 3',
+  favInstructor: jen,
+});
+
+console.log('===Generic People===');
+jill.speak();
+console.log(jill.gender);
+jack.speak();
+console.log(jack.age);
+
+console.log('===Instructors===');
+josh.demo('pseudoclassical prototypal inheritance');
+console.log(josh.catchPhrase);
+jen.grade(matt,'Javascript Fundamentals');
+console.log(jen.specialty);
+console.log(jen.favLanguage);
+
+console.log('===Students===');
+matt.listsSubjects();
+matt.PRAssignment('Javascript IV');
+console.log(matt.previousBackground);
+martha.sprintChallenge(martha.favSubjects[0]);
+console.log(martha.className);
+
+console.log('===Project Managers===');
+nick.debugsCode(matt,'classical inheritance');
+console.log(nick.gradClassName);
+console.log(nick.favInstructor);
+nora.standUp('ux3_nora');
