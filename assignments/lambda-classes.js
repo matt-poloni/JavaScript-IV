@@ -24,6 +24,14 @@ class Instructor extends Person {
   grade(student, subject) {
     console.log(`${student.name} receives a perfect score on ${subject}`)
   }
+  changeGrade(student) {
+    let change = (Math.random() * 2) - 1;
+    change > 0 ?
+      change = Math.ceil((100-student.grade)*change) :
+      change = Math.ceil(student.grade*change);
+    student.grade += change;
+    return change;
+  }
 };
 
 class Student extends Person {
@@ -32,6 +40,7 @@ class Student extends Person {
     this.previousBackground = attr.previousBackground;
     this.className = attr.className;
     this.favSubjects = attr.favSubjects;
+    this.grade = Math.ceil(Math.random() * 100);
   }
   listsSubjects() {
     this.favSubjects.forEach(function(subject) {console.log(subject)});
@@ -175,5 +184,10 @@ console.log(martha.className);
 console.log('===Project Managers===');
 nick.debugsCode(matt,'classical inheritance');
 console.log(nick.gradClassName);
-console.log(nick.favInstructor);
+console.log(nick.favInstructor.name);
 nora.standUp('ux3_nora');
+
+console.log('===Stretch 1 & 2===');
+console.log(matt.grade);
+console.log(nick.changeGrade(matt));
+console.log(matt.grade);
