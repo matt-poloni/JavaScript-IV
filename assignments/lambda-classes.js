@@ -88,11 +88,6 @@ const jack = new Person({
   age: 19,
   gender: 'male',
 });
-console.log('===Generic People===');
-jill.speak();
-console.log(jill.gender);
-jack.speak();
-console.log(jack.age);
 
 // Instructors
 const josh = new Instructor({
