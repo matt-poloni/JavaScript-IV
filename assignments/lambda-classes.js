@@ -55,6 +55,7 @@ class Student extends Person {
     this.grade > 70 ?
       console.log(`${this.name} can graduate!`) :
       console.log(`${this.name} isn't ready to graduate yet`);
+    return this.grade > 70;
   }
 };
 
